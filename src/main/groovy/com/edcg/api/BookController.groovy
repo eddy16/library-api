@@ -34,14 +34,10 @@ class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    def create(@RequestBody Book book) {
+    @RequestMapping(method = RequestMethod.PUT)
+    def save(@RequestBody Book book) {
         print "################## "+book+" #########################"
         return bookRepository.save(book);
-    }
-
-    @RequestMapping(value="/{id}",method = RequestMethod.PUT)
-    def update(@RequestBody Book book){
-        return bookRepository.save(book)
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
