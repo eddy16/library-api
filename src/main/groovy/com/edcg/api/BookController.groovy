@@ -44,7 +44,7 @@ class BookController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-    def delete(@PathVariable def id){
+    def delete(@PathVariable long id){
         return bookRepository.delete(id)
     }
 }
