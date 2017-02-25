@@ -28,12 +28,13 @@ class BookController {
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
-    def getById(@PathVariable def id){
+    def getById(@PathVariable long id){
         return bookRepository.findById(id)
     }
 
     @RequestMapping(method = RequestMethod.POST)
     def create(Book book) {
+        print book
         return bookRepository.save(book);
     }
 
