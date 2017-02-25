@@ -5,6 +5,7 @@ import com.edcg.repository.BookRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
@@ -21,22 +22,28 @@ class BookController {
     @Autowired
     BookRepository bookRepository
 
-    @RequestMapping("/create")
-    def create(String name, String author) {
-        Book book = null;
-        try {
-            book = new Book(name, author);
-            bookRepository.save(book);
-        }
-        catch (Exception ex) {
-            return "Error creating the user: " + ex.toString();
-        }
-        return "Book succesfully created! (id = " + book.getId() + ")";
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     def getAll(){
         return bookRepository.findAll()
     }
 
+    @RequestMapping(value = "/{id}",method = RequestMethod.GET)
+    def getById(@PathVariable def id){
+        return bookRepository.findById(id)
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    def create(Book book) {
+        return bookRepository.save(book);
+    }
+
+    @RequestMapping(value="/{id}",method = RequestMethod.PUT)
+    def update(Book book){
+        return bookRepository.save(book)
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    def delete(@PathVariable def id){
+        return bookRepository.delete(id)
+    }
 }
