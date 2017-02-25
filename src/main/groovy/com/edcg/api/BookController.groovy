@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Scope
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
@@ -33,18 +34,18 @@ class BookController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    def create(Book book) {
-        print book
+    def create(@RequestBody Book book) {
+        print "################## "+book+" #########################"
         return bookRepository.save(book);
     }
 
     @RequestMapping(value="/{id}",method = RequestMethod.PUT)
-    def update(Book book){
+    def update(@RequestBody Book book){
         return bookRepository.save(book)
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     def delete(@PathVariable long id){
-        return bookRepository.delete(id)
+        bookRepository.delete(id)
     }
 }
