@@ -22,7 +22,6 @@ class Book {
     String author
 
     Book(){
-
     }
 
     Book(Long id){

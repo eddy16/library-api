@@ -14,4 +14,6 @@ interface BookRepository extends CrudRepository<Book,Long>{
     List<Book> findAll()
 
     Book findById(Long id)
+
+    List<Book> save(List<Book> books)
 }
