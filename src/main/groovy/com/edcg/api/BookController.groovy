@@ -38,11 +38,6 @@ class BookController {
         return bookRepository.save(book)
     }
 
-    @RequestMapping(method =  RequestMethod.POST)
-    def save(@RequestBody List<Book> books){
-        return bookRepository.save(books)
-    }
-
     @RequestMapping(method = RequestMethod.PUT)
     def update(@RequestBody Book book){
         return bookRepository.save(book)
