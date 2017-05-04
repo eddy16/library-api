@@ -2,8 +2,8 @@ package com.edcg.repository
 
 import com.edcg.model.Book
 import org.springframework.data.repository.CrudRepository
+import org.springframework.transaction.annotation.Transactional
 
-import javax.transaction.Transactional
 
 /**
  * Created by Edgar on 25/02/2017.
