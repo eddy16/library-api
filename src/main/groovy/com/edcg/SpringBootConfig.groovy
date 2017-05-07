@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.Bean
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 /**
  * Created by Edgar on 24/02/2017.
@@ -18,11 +19,11 @@ class SpringBootConfig {
     }
 
     @Bean
-    CommandLineRunner init(final AccountRepository accountRepository) {
+    CommandLineRunner init(final AccountRepository repository, final BCryptPasswordEncoder encoder){
         return new CommandLineRunner() {
             @Override
-            public void run(String... arg0) throws Exception {
-                accountRepository.save(new Account("edgar", "1234"))
+            void run(String... strings) throws Exception {
+                repository.save(new Account("goku",encoder.encode("kakaroto")))
             }
         }
     }

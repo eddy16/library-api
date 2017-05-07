@@ -1,0 +1,39 @@
+version: '2'
+services:
+  postgres-boot: # Entrada para definir el contenedor. Por defecto este nombre se usa como hostname
+    container_name: postgres-boot
+    image: postgres:latest
+    volumes:  # Definición de volúmenes
+      - data:/var/lib/postgresql/data
+    environment: # Definición de variables de entorno
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:  # Mapeo de puertos
+      - "5432:5432"
+    networks:
+      - example-network
+
+  library:
+    container_name: library
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-boot/postgres # el hostname 'postgres' viene del nombre de la entrada al contendor
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+    ports:
+      - "8080:8080"
+    links:
+      - postgres-boot
+    networks:
+      - example-network
+    depends_on:
+      - postgres-boot
+
+networks:
+    example-network:
+        driver: bridge
+
+volumes:
+  data:

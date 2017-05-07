@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping(value = "/book")
+@RequestMapping(value = "/api/book")
 @Scope("request")
 class BookController {
 
